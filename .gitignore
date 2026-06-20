@@ -1,0 +1,23 @@
+# ── CC65 Build Artifacts ──────────────────────────────────────
+obj/
+#builds/
+
+# ── VS Code Local Settings ────────────────────────────────────
+# Commit .vscode/tasks.json, c_cpp_properties.json, settings.json
+# but ignore user-specific local overrides
+.vscode/*.log
+.vscode/ipch/
+
+# ── macOS Filesystem Noise ────────────────────────────────────
+.DS_Store
+**/.DS_Store
+
+# ── Atari disk images (usually generated, not source) ─────────
+# Comment these out if you store reference .atr files in the repo
+*.atr
+#*.xex
+*.map
+*.lbl
+
+# Per-machine platform config - not committed
+config.mk

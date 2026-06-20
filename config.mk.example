@@ -1,0 +1,21 @@
+##############################################################
+#  config.mk.example — copy to config.mk and edit for your machine
+#
+#  Windows example:
+#    CC65_HOME := C:/cc65
+#    ALTIRRA   := C:/Program Files/Altirra/Altirra64.exe
+#    EMULATOR  := "$(ALTIRRA)" 
+#    MKDIR     := mkdir -p
+#    RMDIR     := rm -rf
+#
+#  macOS example:
+#    CC65_HOME := /usr/local/bin/cc65
+#    EMULATOR  := open -a Atari800MacX
+#    MKDIR     := mkdir -p
+#    RMDIR     := rm -rf
+##############################################################
+
+CC65_HOME   := C:/cc65
+EMULATOR    := open -a Atari800MacX
+MKDIR       := mkdir -p
+RMDIR       := rm -rf

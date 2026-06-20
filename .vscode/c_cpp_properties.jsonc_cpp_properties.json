@@ -1,0 +1,46 @@
+{
+  "configurations": [
+
+    {
+      "name": "Atari 8-bit (CC65) - Windows",
+      "includePath": [
+        "${workspaceFolder}/include",
+        "c:/cc65/include",
+        "c:/cc65/include/atari"
+      ],
+      "defines": [
+        "__CC65__",
+        "__ATARI__",
+        "__ATARIXL__"
+      ],
+      "cStandard": "c99",
+      "intelliSenseMode": "gcc-x64",
+      "compilerArgs": [
+        "-Wno-unknown-pragmas"
+      ],
+      "compilerPath": "c:/cc65/bin/cl65"
+    },
+
+    {
+      "name": "Atari 8-bit (CC65) - Mac",
+      "includePath": [
+        "${workspaceFolder}/include",
+        "/usr/local/bin/cc65/include",
+        "/usr/local/bin/cc65/include/atari"
+      ],
+      "defines": [
+        "__CC65__",
+        "__ATARI__",
+        "__ATARIXL__"
+      ],
+      "cStandard": "c99",
+      "intelliSenseMode": "gcc-arm",
+      "compilerArgs": [
+        "-Wno-unknown-pragmas"
+      ],
+      "compilerPath": "/usr/local/bin/cc65/bin/cl65"
+    }
+
+  ],
+  "version": 4
+}

@@ -1,0 +1,18 @@
+# ── Force LF line endings on all platforms ────────────────────
+#  Make and shell scripts REQUIRE LF. CRLF breaks them silently.
+
+Makefile        text eol=lf
+*.mk            text eol=lf
+*.sh            text eol=lf
+
+# Source files — normalize to LF
+*.c             text eol=lf
+*.h             text eol=lf
+*.s             text eol=lf
+
+# VS Code config
+*.json          text eol=lf
+
+# Git config
+.gitattributes  text eol=lf
+.gitignore      text eol=lf
