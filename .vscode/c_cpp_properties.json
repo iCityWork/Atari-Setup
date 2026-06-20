@@ -5,8 +5,7 @@
       "name": "Atari 8-bit (CC65) - Windows",
       "includePath": [
         "${workspaceFolder}/include",
-        "c:/cc65/include",
-        "c:/cc65/include/atari"
+        "c:/cc65/include"
       ],
       "defines": [
         "__CC65__",
