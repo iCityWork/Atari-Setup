@@ -2,42 +2,99 @@
   "configurations": [
 
     {
-      "name": "Atari 8-bit (CC65) - Windows",
+      "name": "Atari 400/800 — Windows",
       "includePath": [
-        "${workspaceFolder}/include",
+        "${workspaceFolder}/inc",
         "c:/cc65/include"
       ],
       "defines": [
         "__CC65__",
-        "__ATARI__",
-        "__ATARIXL__"
+        "__ATARI__"
       ],
-      "cStandard": "c99",
+      "cStandard": "c89",
       "intelliSenseMode": "gcc-x64",
-      "compilerArgs": [
-        "-Wno-unknown-pragmas"
-      ],
-      "compilerPath": "c:/cc65/bin/cl65"
+      "compilerArgs": [ "-Wno-unknown-pragmas" ],
+      "compilerPath": "c:/cc65/bin/cc65",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/src",
+          "${workspaceFolder}/inc",
+          "c:/cc65/include"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
     },
 
     {
-      "name": "Atari 8-bit (CC65) - Mac",
+      "name": "Atari XL/XE — Windows",
       "includePath": [
-        "${workspaceFolder}/include",
-        "/usr/local/bin/cc65/include",
-        "/usr/local/bin/cc65/include/atari"
+        "${workspaceFolder}/inc",
+        "c:/cc65/include"
       ],
       "defines": [
         "__CC65__",
-        "__ATARI__",
         "__ATARIXL__"
       ],
-      "cStandard": "c99",
-      "intelliSenseMode": "gcc-arm",
-      "compilerArgs": [
-        "-Wno-unknown-pragmas"
+      "cStandard": "c89",
+      "intelliSenseMode": "gcc-x64",
+      "compilerArgs": [ "-Wno-unknown-pragmas" ],
+      "compilerPath": "c:/cc65/bin/cc65",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/src",
+          "${workspaceFolder}/inc",
+          "c:/cc65/include"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    },
+
+    {
+      "name": "Atari 400/800 — macOS",
+      "includePath": [
+        "${workspaceFolder}/inc",
+        "/usr/local/share/cc65/include"
       ],
-      "compilerPath": "/usr/local/bin/cc65/bin/cl65"
+      "defines": [
+        "__CC65__",
+        "__ATARI__"
+      ],
+      "cStandard": "c89",
+      "intelliSenseMode": "clang-arm64",
+      "compilerArgs": [ "-Wno-unknown-pragmas" ],
+      "compilerPath": "/usr/local/bin/cc65",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/src",
+          "${workspaceFolder}/inc",
+          "/usr/local/share/cc65/include"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
+    },
+
+    {
+      "name": "Atari XL/XE — macOS",
+      "includePath": [
+        "${workspaceFolder}/inc",
+        "/usr/local/share/cc65/include"
+      ],
+      "defines": [
+        "__CC65__",
+        "__ATARIXL__"
+      ],
+      "cStandard": "c89",
+      "intelliSenseMode": "clang-arm64",
+      "compilerArgs": [ "-Wno-unknown-pragmas" ],
+      "compilerPath": "/usr/local/bin/cc65",
+      "browse": {
+        "path": [
+          "${workspaceFolder}/src",
+          "${workspaceFolder}/inc",
+          "/usr/local/share/cc65/include"
+        ],
+        "limitSymbolsToIncludedHeaders": true
+      }
     }
 
   ],

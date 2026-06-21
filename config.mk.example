@@ -3,8 +3,7 @@
 #
 #  Windows example:
 #    CC65_HOME := C:/cc65
-#    ALTIRRA   := C:/Program Files/Altirra/Altirra64.exe
-#    EMULATOR  := "$(ALTIRRA)" 
+#    EMULATOR  := "C:/Program Files/Altirra/Altirra64.exe"
 #    MKDIR     := mkdir -p
 #    RMDIR     := rm -rf
 #
@@ -15,7 +14,7 @@
 #    RMDIR     := rm -rf
 ##############################################################
 
-CC65_HOME   := C:/cc65
-EMULATOR    := open -a Atari800MacX
-MKDIR       := mkdir -p
-RMDIR       := rm -rf
+CC65_HOME := C:/cc65
+EMULATOR  := "C:/Program Files/Altirra/Altirra64.exe"
+MKDIR     := mkdir -p
+RMDIR     := rm -rf

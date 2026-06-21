@@ -2,7 +2,7 @@
 #  Makefile — Atari 8-bit CC65 Cross-Development
 #
 #  Requires config.mk in the same directory.
-#  Copy config.mk.example to config.mk and edit for your machine.
+#  Copy config.mk.example → config.mk and edit paths.
 #
 #  Targets:
 #    make              →  debug build, Atari 400/800
@@ -19,7 +19,7 @@
 
 # ── Per-Machine Configuration ─────────────────────────────────
 #  config.mk sets: CC65_HOME, EMULATOR, MKDIR, RMDIR
-#  It is not committed to Git — each machine has its own copy.
+#  It is NOT committed to Git — each machine has its own copy.
 include config.mk
 
 # ── CC65 Toolchain ────────────────────────────────────────────
@@ -35,11 +35,13 @@ PROJECT     := AtariSetup
 
 # ── Directory Layout ──────────────────────────────────────────
 SRC_DIR     := src
-INC_DIR     := include
+INC_DIR     := inc
 OBJ_DIR     := obj
 BUILD_DIR   := builds
 
 # ── Target & Config ───────────────────────────────────────────
+#  These are overridden by the named shortcut targets below.
+#  Never change these defaults — use the shortcut targets instead.
 TARGET      ?= atari
 CONFIG      ?= debug
 
@@ -66,8 +68,8 @@ LBLFILE     := $(BLD_SUBDIR)/$(PROJECT).lbl
 C_SRCS      := $(wildcard $(SRC_DIR)/*.c)
 ASM_SRCS    := $(wildcard $(SRC_DIR)/*.s)
 
-C_OBJS      := $(patsubst $(SRC_DIR)/%.c, $(OBJ_SUBDIR)/%.o,     $(C_SRCS))
-ASM_OBJS    := $(patsubst $(SRC_DIR)/%.s, $(OBJ_SUBDIR)/%-asm.o, $(ASM_SRCS))
+C_OBJS      := $(patsubst $(SRC_DIR)/%.c,  $(OBJ_SUBDIR)/%.o,     $(C_SRCS))
+ASM_OBJS    := $(patsubst $(SRC_DIR)/%.s,  $(OBJ_SUBDIR)/%-asm.o, $(ASM_SRCS))
 ALL_OBJS    := $(C_OBJS) $(ASM_OBJS)
 
 # ── Header Dependency Tracking ────────────────────────────────
@@ -123,15 +125,20 @@ build: $(OUTPUT)
 	@echo "  └──────────────────────────────────────────────"
 
 # ── Directory Rules ───────────────────────────────────────────
+#  Two-step creation: parent directory first, then the subdir.
+#  This is required on Windows where mkdir cannot create
+#  nested paths in one shot.
 $(OBJ_SUBDIR):
+	@$(MKDIR) $(OBJ_DIR)
 	@$(MKDIR) $@
 
 $(BLD_SUBDIR):
+	@$(MKDIR) $(BUILD_DIR)
 	@$(MKDIR) $@
 
 # ── Link ──────────────────────────────────────────────────────
 $(OUTPUT): $(ALL_OBJS) | $(BLD_SUBDIR)
-	@echo "  [LD]  $(notdir $@)"
+	@echo "  [LD]  $(notdir $@)  (target=$(TARGET))"
 	@$(LD65) $(LD65FLAGS) \
 	         -o $@ \
 	         -m $(MAPFILE) \
@@ -139,9 +146,9 @@ $(OUTPUT): $(ALL_OBJS) | $(BLD_SUBDIR)
 	         $(ALL_OBJS) \
 	         $(CC65_LIB)/$(TARGET).lib
 
-# ── Compile + Assemble: .c → .o ───────────────────────────────
+# ── Compile: .c → intermediate .s → .o ───────────────────────
 $(OBJ_SUBDIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_SUBDIR)
-	@echo "  [CC]  $<"
+	@echo "  [CC]  $<  (target=$(TARGET))"
 	@$(CC65) $(CC65FLAGS) \
 	         --create-dep $(OBJ_SUBDIR)/$*.d \
 	         -o $(OBJ_SUBDIR)/$*.s \
@@ -151,17 +158,18 @@ $(OBJ_SUBDIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_SUBDIR)
 	         -o $@ \
 	         $(OBJ_SUBDIR)/$*.s
 
-# ── Assemble: hand-written .s → .o ────────────────────────────
+# ── Assemble: hand-written .s → .o ───────────────────────────
 $(OBJ_SUBDIR)/%-asm.o: $(SRC_DIR)/%.s | $(OBJ_SUBDIR)
-	@echo "  [AS]  $< (hand-written)"
+	@echo "  [AS]  $<  (hand-written, target=$(TARGET))"
 	@$(CA65) $(CA65FLAGS) \
 	         -o $@ \
 	         $<
 
 # ── Clean ─────────────────────────────────────────────────────
 clean:
-	@echo "  Removing obj/ and builds/ ..."
-	@$(RMDIR) $(OBJ_DIR) $(BUILD_DIR)
+	@echo "  Removing $(OBJ_DIR)/ and $(BUILD_DIR)/ ..."
+	@$(RMDIR) $(OBJ_DIR)
+	@$(RMDIR) $(BUILD_DIR)
 	@echo "  Done."
 
 # ── Help ──────────────────────────────────────────────────────
@@ -177,6 +185,7 @@ help:
 	@echo "  make run-xl-release →  XL/XE release build + launch"
 	@echo "  make clean          →  remove all obj/ and builds/"
 	@echo ""
-	@echo "  Add files: drop .c or .s into src/ — no Makefile edits needed."
+	@echo "  Drop .c or .s files into src/ — no Makefile edits needed."
+	@echo "  Drop .h files into inc/."
 	@echo "  Platform config: edit config.mk for this machine."
 	@echo ""

@@ -2,16 +2,12 @@
   "version": "2.0.0",
   "tasks": [
 
-    // ── 1. BUILD + LAUNCH  (Ctrl+Shift+B — default) ───────────
     {
-      "label": "Make: Run → Debug + Launch in Atari800MacX",
+      "label": "Make: Run → Atari 400/800 Debug + Launch",
       "type": "shell",
       "command": "make run",
       "options": { "cwd": "${workspaceFolder}" },
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
+      "group": { "kind": "build", "isDefault": true },
       "presentation": { "reveal": "always", "panel": "shared", "clear": true },
       "problemMatcher": {
         "owner": "cc65",
@@ -21,12 +17,11 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "Debug build + auto-launch in Atari800MacX.  (Ctrl+Shift+B)"
+      "detail": "Atari 400/800 debug build + auto-launch.  (Ctrl+Shift+B)"
     },
 
-    // ── 2. DEBUG BUILD ONLY — no launch ───────────────────────
     {
-      "label": "Make: Debug → Atari 400/800",
+      "label": "Make: Build → Atari 400/800 Debug",
       "type": "shell",
       "command": "make debug",
       "options": { "cwd": "${workspaceFolder}" },
@@ -40,12 +35,11 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "Debug build only. Output: builds/atari_debug/"
+      "detail": "builds/atari_debug/  — cc65 -t atari"
     },
 
-    // ── 3. RELEASE BUILD ONLY — no launch ─────────────────────
     {
-      "label": "Make: Release → Atari 400/800",
+      "label": "Make: Build → Atari 400/800 Release",
       "type": "shell",
       "command": "make release",
       "options": { "cwd": "${workspaceFolder}" },
@@ -59,12 +53,11 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "Full optimization (-Osir). Output: builds/atari_release/"
+      "detail": "builds/atari_release/  — cc65 -t atari -Osir"
     },
 
-    // ── 4. RELEASE BUILD + LAUNCH ─────────────────────────────
     {
-      "label": "Make: Run → Release + Launch in Atari800MacX",
+      "label": "Make: Run → Atari 400/800 Release + Launch",
       "type": "shell",
       "command": "make run-release",
       "options": { "cwd": "${workspaceFolder}" },
@@ -78,31 +71,11 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "Release build (-Osir) + launch in Atari800MacX."
+      "detail": "builds/atari_release/  + launch"
     },
 
-    // ── 5. XL/XE DEBUG BUILD + LAUNCH ────────────────────────
     {
-      "label": "Make: Run → XL/XE Debug + Launch in Atari800MacX",
-      "type": "shell",
-      "command": "make run-xl",
-      "options": { "cwd": "${workspaceFolder}" },
-      "group": "build",
-      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
-      "problemMatcher": {
-        "owner": "cc65",
-        "fileLocation": ["relative", "${workspaceFolder}"],
-        "pattern": {
-          "regexp": "^(.+)\\((\\d+)\\):\\s+(Error|Warning|Note):\\s+(.+)$",
-          "file": 1, "line": 2, "severity": 3, "message": 4
-        }
-      },
-      "detail": "XL/XE debug build + launch in Atari800MacX."
-    },
-
-    // ── 6. XL/XE DEBUG BUILD ONLY ────────────────────────────
-    {
-      "label": "Make: Debug → Atari XL/XE",
+      "label": "Make: Build → Atari XL/XE Debug",
       "type": "shell",
       "command": "make xl",
       "options": { "cwd": "${workspaceFolder}" },
@@ -116,12 +89,11 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "XL/XE debug build only. Output: builds/atarixl_debug/"
+      "detail": "builds/atarixl_debug/  — cc65 -t atarixl"
     },
 
-    // ── 7. XL/XE RELEASE BUILD ONLY ──────────────────────────
     {
-      "label": "Make: Release → Atari XL/XE",
+      "label": "Make: Build → Atari XL/XE Release",
       "type": "shell",
       "command": "make xl-release",
       "options": { "cwd": "${workspaceFolder}" },
@@ -135,10 +107,45 @@
           "file": 1, "line": 2, "severity": 3, "message": 4
         }
       },
-      "detail": "XL/XE release build only. Output: builds/atarixl_release/"
+      "detail": "builds/atarixl_release/  — cc65 -t atarixl -Osir"
     },
 
-    // ── 8. CLEAN ──────────────────────────────────────────────
+    {
+      "label": "Make: Run → Atari XL/XE Debug + Launch",
+      "type": "shell",
+      "command": "make run-xl",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+      "problemMatcher": {
+        "owner": "cc65",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+)\\((\\d+)\\):\\s+(Error|Warning|Note):\\s+(.+)$",
+          "file": 1, "line": 2, "severity": 3, "message": 4
+        }
+      },
+      "detail": "builds/atarixl_debug/  + launch"
+    },
+
+    {
+      "label": "Make: Run → Atari XL/XE Release + Launch",
+      "type": "shell",
+      "command": "make run-xl-release",
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "presentation": { "reveal": "always", "panel": "shared", "clear": true },
+      "problemMatcher": {
+        "owner": "cc65",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.+)\\((\\d+)\\):\\s+(Error|Warning|Note):\\s+(.+)$",
+          "file": 1, "line": 2, "severity": 3, "message": 4
+        }
+      },
+      "detail": "builds/atarixl_release/  + launch"
+    },
+
     {
       "label": "Make: Clean all artifacts",
       "type": "shell",
@@ -150,7 +157,6 @@
       "detail": "Removes all obj/ and builds/ directories."
     },
 
-    // ── 9. HELP ───────────────────────────────────────────────
     {
       "label": "Make: Show help",
       "type": "shell",
